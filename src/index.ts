@@ -159,9 +159,16 @@ const addPhone = (
   warehouse.push(newPhone);
 };
 
+addPhone(newyorkWarehouse, "oneplus7pro", 499, true);
+
+console.log(newyorkWarehouse);
+
 const deletePhoneByIndex = (warehouse: Phone[], index: number): void => {
   warehouse.splice(index, 1);
 };
+
+deletePhoneByIndex(newyorkWarehouse, 9);
+console.log(newyorkWarehouse);
 
 const filter5G = (warehouse: Phone[]): Phone[] => {
   let phones: Phone[] = [];
@@ -171,6 +178,8 @@ const filter5G = (warehouse: Phone[]): Phone[] => {
   return phones;
 };
 
+console.log(filter5G(detroitWarehouse));
+
 const filterPriceLessThan = (warehouse: Phone[], price: number): Phone[] => {
   let phones: Phone[] = [];
   warehouse.forEach((phone) => {
@@ -178,6 +187,8 @@ const filterPriceLessThan = (warehouse: Phone[], price: number): Phone[] => {
   });
   return phones;
 };
+
+console.log(filterPriceLessThan(newyorkWarehouse, 500));
 
 const filterPriceGreaterThan = (warehouse: Phone[], price: number): Phone[] => {
   let phones: Phone[] = [];
@@ -187,15 +198,22 @@ const filterPriceGreaterThan = (warehouse: Phone[], price: number): Phone[] => {
   return phones;
 };
 
+console.log(filterPriceGreaterThan(newyorkWarehouse, 500));
+
 const findPhoneByName = (
   warehouse: Phone[],
   name: string
 ): Phone | undefined => {
-  warehouse.forEach((phone) => {
-    if (phone.name === name) return phone;
-  });
-  return undefined;
+  //  warehouse.forEach((phone) => {
+  //    if (name === phone.name) {
+  //      return phone;
+  //    }
+  //  });
+  return warehouse.find((phone) => phone.name === name);
 };
+
+console.log(findPhoneByName(chicagoWarehouse, "Galaxy S10"));
+console.log(findPhoneByName(newyorkWarehouse, "Pixel 5"));
 
 const calcAverageCost = (warehouse: Phone[]): number | undefined => {
   if (warehouse.length === 0) return undefined;
@@ -206,12 +224,17 @@ const calcAverageCost = (warehouse: Phone[]): number | undefined => {
   return totalPrice / warehouse.length;
 };
 
+console.log(calcAverageCost(newyorkWarehouse));
+
 const doWeHaveA5GPhone = (warehouse: Phone[]): boolean => {
+  let fiveG_flag: boolean = false;
   warehouse.forEach((phone) => {
-    if (phone.fiveG === true) return true;
+    if (phone.fiveG === true) fiveG_flag = true;
   });
-  return false;
+  return fiveG_flag;
 };
+
+console.log(doWeHaveA5GPhone(newyorkWarehouse));
 
 const phoneFlashSale = (
   warehouse: Phone[],
@@ -230,6 +253,8 @@ const phoneFlashSale = (
 
   return salePhones;
 };
+
+console.log(phoneFlashSale(newyorkWarehouse, 20));
 
 const phoneFlashSaleV2 = (
   warehouse: Phone[],
@@ -251,3 +276,5 @@ const phoneFlashSaleV2 = (
 
   return salePhones;
 };
+
+console.log(phoneFlashSaleV2(newyorkWarehouse, ["Pixel 4a", "Pixel 5"], 10));
